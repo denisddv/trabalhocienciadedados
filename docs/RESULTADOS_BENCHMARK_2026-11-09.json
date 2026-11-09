@@ -1,0 +1,13 @@
+{
+  "antes_shuffle_join": {
+    "segundos": 1.7516,
+    "categorias": 4,
+    "total": 149850000
+  },
+  "depois_broadcast_join": {
+    "segundos": 0.4577,
+    "categorias": 4,
+    "total": 149850000
+  },
+  "ganho_percentual": 73.87
+}
