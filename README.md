@@ -20,3 +20,32 @@ Produtor de eventos em Python -> tópico Kafka `novamarket-pedidos` -> Spark Str
 Kafka single broker, streaming e DAG não testados ponta a ponta, sem garantias exactly-once, autenticação e monitoramento de produção. Antes da entrega final, executar em Docker, coletar Spark UI e logs, e atualizar o relatório técnico.
 
 Recomendações: Kafka com replicação, idempotência transacional, contratos de schema, métricas, compactação de arquivos e testes de falha.
+
+## Airflow chama o Spark no próprio contêiner Spark (WSL / Docker Desktop)
+
+Para evitar incompatibilidade Python 3.12 (Airflow) vs 3.8 (Spark Worker), a DAG
+faz `docker exec` no Spark Master. A CLI Docker e o socket são disponibilizados
+no Airflow. **Acesso ao Docker socket equivale a controle privilegiado do host:
+usar somente neste ambiente local de laboratório, nunca em um Airflow público.**
+
+Antes de recriar o Airflow, a partir do Ubuntu WSL:
+
+```bash
+cd ~/projetos/trabalhocienciadedados
+# Configura o grupo real do socket. .env deve ficar fora do Git.
+printf 'DOCKER_GID=%s\n' "$(stat -c '%g' /var/run/docker.sock)" > .env
+docker compose config
+# Preservar backup do SQLite e conferir airflow/state antes de recriar.
+docker compose up -d --no-deps --build --force-recreate airflow
+docker compose exec airflow docker ps --filter label=com.docker.compose.service=spark-master
+docker compose exec airflow airflow dags list-import-errors
+```
+
+Se `docker ps` no Airflow falhar com permissão negada, confira
+`docker compose exec airflow id`, `stat -c '%g' /var/run/docker.sock`
+e recrie Airflow com `DOCKER_GID` correto. O nome do projeto Compose é
+`trabalhocienciadedados`; se mudar o nome do projeto, atualize o filtro
+na DAG. Os resultados do benchmark variam entre execuções.
+
+A validação final de ponta a ponta desta versão requer execução no ambiente
+do aluno e verificação das quatro tarefas verdes no Airflow.
