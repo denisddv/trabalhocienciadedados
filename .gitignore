@@ -7,3 +7,8 @@ datalake/trusted/*
 datalake/refined/*
 datalake/_checkpoints/
 benchmark/resultados.json
+
+# Dados locais do Airflow (SQLite, logs e credenciais)
+airflow/state/
+backups/
+airflow_process_data_debug.log
