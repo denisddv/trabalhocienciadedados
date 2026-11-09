@@ -38,5 +38,8 @@ services:
       AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
       AIRFLOW__CORE__DAGS_FOLDER: /opt/project/airflow/dags
       AIRFLOW__CORE__EXECUTOR: SequentialExecutor
-    volumes: ['.:/opt/project']
+    volumes:
+      - .:/opt/project
+      # Persistência dos metadados e logs do Airflow fora do contêiner.
+      - ./airflow/state:/opt/airflow
     command: standalone
