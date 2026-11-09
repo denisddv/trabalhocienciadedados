@@ -62,7 +62,7 @@ A deduplicação por `id_pedido` da POC é simples e não define regras de desem
 |---|---|---|
 | Kafka | Tópico `novamarket-pedidos`, 3 partições, replicação 1 | Ingestão configurada |
 | Produtor Python | Mensagem de envio de 200 eventos | Eventos publicados |
-| RAW | Contagem `find ... | wc -l` igual a 200; arquivos `part-*.json` | Persistência da ingestão confirmada |
+| RAW | Contagem de linhas dos arquivos JSON igual a 200; arquivos `part-*.json` | Persistência da ingestão confirmada |
 | Spark streaming | Registros de execução, offsets e checkpoints; Spark Worker registrado | Streaming inicializou e consumiu dados |
 | TRUSTED | Arquivo `part-*.snappy.parquet` presente | Saída tratada materializada |
 | REFINED | Arquivo `part-*.snappy.parquet` presente | Saída agregada materializada |
