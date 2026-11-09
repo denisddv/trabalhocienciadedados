@@ -31,7 +31,9 @@ services:
     hostname: airflow
     # Grupo do Spark (GID 185) para acesso compartilhado aos arquivos Parquet.
     # Mantemos o UID original do Airflow para não afetar sua inicialização.
-    group_add: ['185']
+    # Docker socket: acesso privilegiado, somente para uso local de desenvolvimento.
+    # Informe DOCKER_GID usando: stat -c '%g' /var/run/docker.sock
+    group_add: ['185', '${DOCKER_GID:-0}']
     depends_on: [spark-master]
     ports: ['8081:8080']
     environment:
@@ -42,4 +44,5 @@ services:
       - .:/opt/project
       # Persistência dos metadados e logs do Airflow fora do contêiner.
       - ./airflow/state:/opt/airflow
+      - /var/run/docker.sock:/var/run/docker.sock
     command: standalone
