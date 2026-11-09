@@ -122,3 +122,12 @@ O Spark `overwrite` remove e recria diretórios. Se houver falha de permissões 
 - Gravação local em Parquet não substitui transações ACID ou versionamento de tabelas.
 - Airflow em `standalone`, SQLite e socket Docker: configurações **não adequadas para produção**.
 - As evidências visuais devem ser anexadas pelo aluno; as capturas não são armazenadas automaticamente neste repositório.
+
+## Vídeo e entrega acadêmica (09/11/2026)
+
+- **Vídeo demonstrativo:** https://youtu.be/685Qp5Ovofg
+- **Relatório acadêmico, apresentação e evidências:** diretório `docs/entrega/` (arquivos binários organizados para envio junto ao projeto).
+- **Relatório técnico em Markdown:** [docs/RELATORIO_TECNICO.md](docs/RELATORIO_TECNICO.md).
+- **Benchmark observado:** [docs/RESULTADOS_BENCHMARK_2026-11-09.json](docs/RESULTADOS_BENCHMARK_2026-11-09.json).
+
+O vídeo mostra a implementação local; a execução final da DAG foi confirmada com quatro tarefas concluídas no Airflow. Os arquivos de apresentação e as capturas são materiais de evidência, não substituem o código-fonte do pipeline.
