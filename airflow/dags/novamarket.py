@@ -13,7 +13,7 @@ SPARK_MASTER = (
     '--filter label=com.docker.compose.project=trabalhocienciadedados '
     '--filter label=com.docker.compose.service=spark-master '
     '--filter status=running '
-    '--format "{{.ID}}" | head -n 1)'
+    '--quiet | head -n 1)'
 )
 
 SPARK_SUBMIT = (
