@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+datalake/raw/*
+datalake/trusted/*
+datalake/refined/*
+datalake/_checkpoints/
+benchmark/resultados.json
